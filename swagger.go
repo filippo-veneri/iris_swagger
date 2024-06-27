@@ -10,7 +10,7 @@ import (
 	"golang.org/x/net/webdav"
 
 	"github.com/kataras/iris/v12"
-	"github.com/swaggo/swag"
+	"github.com/swaggo/swag/v2"
 )
 
 // Configurator represents a configuration setter.
@@ -188,7 +188,8 @@ func Handler(h *webdav.Handler, configurators ...Configurator) iris.Handler {
 	}
 
 	handler := func(ctx iris.Context) {
-		path := strings.TrimPrefix(ctx.Path(), config.Prefix)
+		fullPath := ctx.Path()
+		path := strings.TrimPrefix(fullPath, config.Prefix)
 		if sufIdx := strings.LastIndexByte(path, '.'); sufIdx > 0 {
 			suffix := path[sufIdx:]
 			switch suffix {

@@ -1,13 +1,13 @@
 package main
 
 import (
-	"github.com/iris-contrib/swagger"
+	swagger "github.com/filippo-veneri/iris_swagger/v12"
 	"github.com/kataras/iris/v12"
 
-	"github.com/iris-contrib/swagger/_examples/basic/api"
-	"github.com/iris-contrib/swagger/swaggerFiles"
+	"github.com/filippo-veneri/iris_swagger/v12/_examples/basic/api"
+	"github.com/filippo-veneri/iris_swagger/v12/swaggerFiles"
 
-	_ "github.com/iris-contrib/swagger/_examples/basic/docs"
+	_ "github.com/filippo-veneri/iris_swagger/v12/_examples/basic/docs"
 )
 
 // @title Swagger Example API
@@ -35,9 +35,9 @@ func main() {
 
 	// Configure the swagger UI page.
 	swaggerUI := swagger.Handler(swaggerFiles.Handler,
-		swagger.URL("http://localhost:8080/swagger/doc.json"), // The url pointing to API definition.
+		swagger.URL("/swagger/swagger.json"), // The url pointing to API definition.
 		swagger.DeepLinking(true),
-		swagger.Prefix("/swagger"),
+		swagger.Prefix("/swagger"), // Must match the registration prefix
 	)
 	// Register on http://localhost:8080/swagger
 	app.Get("/swagger", swaggerUI)
